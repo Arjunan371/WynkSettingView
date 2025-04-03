@@ -38,7 +38,7 @@ struct StickyHeader: View {
                         .resizable()
                         .frame(width: 25, height: 25)
                     Group {
-                        if offsetContent <= offsetHeader {
+                        if offsetContent <= 0 {
                             Text("Header2")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity, alignment: .center)
@@ -54,10 +54,10 @@ struct StickyHeader: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Color.blue)
                 .zIndex(0)
-                .background(GeometryReader { proxy in
-                    Color.clear
-                        .preference(key: CalculateValue.self, value: proxy.frame(in: .global).maxY)
-                }.frame(height: 0))
+//                .background(GeometryReader { proxy in
+//                    Color.clear
+//                        .preference(key: CalculateValue.self, value: proxy.frame(in: .global).maxY)
+//                }.frame(height: 0))
                 
                 ScrollView {
                     VStack(spacing: 0) {
@@ -76,10 +76,10 @@ struct StickyHeader: View {
                         }
                     }
                 }
-                .onPreferenceChange(CalculateValue.self) { value in
-                    print("headerValue====>", value)
-                    offsetHeader = value
-                }
+//                .onPreferenceChange(CalculateValue.self) { value in
+//                    print("headerValue====>", value)
+//                    offsetHeader = value
+//                }
                 .onPreferenceChange(CalculateContentMinY.self) { value in
                     print("contentValue====>", value)
                     offsetContent = value
@@ -89,12 +89,12 @@ struct StickyHeader: View {
     }
 }
 
-struct CalculateValue: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = nextValue()
-    }
-}
+//struct CalculateValue: PreferenceKey {
+//    static let defaultValue: CGFloat = 0
+//    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+//        value = nextValue()
+//    }
+//}
 
 struct CalculateContentMinY: PreferenceKey {
     static let defaultValue: CGFloat = 0
